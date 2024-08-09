@@ -1,0 +1,28 @@
+- name: nginx_playbook
+  hosts: targets_based_on_Docker
+  tasks:
+    - name: Update apt cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Install latest nginx
+      become: true
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Copy index.html
+      become: true
+      copy:
+        src: ./index.html
+        dest: /usr/share/nginx/html/index.html
+      notify: restart_Nginx
+  
+  #the handler is used to restart the Nginx service only if changes have been made to the configuration or files related to Nginx          
+  handlers:
+    - name: restart_Nginx 
+      become: true 
+      service:
+        name: nginx 
+        state: restarted 
