@@ -1,19 +1,23 @@
 - name: nginx_playbook
   hosts: targets_based_on_Docker
   vars:
-    package_dict:
-       - { name: "nginx", state: "absent" }
-       - { name: "nodejs", state: "latest" }
-       - { name: "postgresql", state: "present" }
-
+    package_name: "nginx"
   tasks:
     - name: Update apt cache
       become: true
       apt:
         update_cache: yes
-
-    - name: Install packages based on dictionary values
-      apt:
-        name : "{{ item.name }}"
-        state : "{{ item.state }}"
-      loop : "{{ package_dict }}"
+    - name : Install nginx package
+      apt :
+        name : "{{ package_name }}"
+        state : latest
+      register : result
+    - name : view register
+      debug :
+        var : result.changed
+    - name : restart nginx if installtion task changed
+      become : true
+      service :   
+        name : nginx
+        state : restarted  
+      when : result.changed == "true" 
