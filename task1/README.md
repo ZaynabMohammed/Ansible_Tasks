@@ -1,4 +1,4 @@
-# Task 1: Use ansible-builtinmodules to:
+# Task 1: Use ansible [modules, handlers] to:
   1. Update cache.
   2. Install latest nginx
   3. Copy index.html from controller to host 1 & host 2
