@@ -1,10 +1,8 @@
-# Task 1
-Use ansible-builtinmodules to:
-1- Update cache
-2- Install latest nginx
-3- Copy index.html from controller to host 1
-4- Restart nginxservice
-5- Can you see your index.html file when you hit host 1 on port 80?
+# Task 1: Use ansible-builtinmodules to:
+  1. Update cache.
+  2. Install latest nginx
+  3. Copy index.html from controller to host 1
+  4. Restart nginxservice
 
 ## Steps
 ### 1) Use Docker to power up multiple Docker containers to act as target servers for Ansible.
@@ -55,11 +53,11 @@ target2                    : ok=5    changed=3    unreachable=0    failed=0    s
 ### 4) Go inside both container to check new index.html
 ```bash
 $ docker exec -ti host1 bash
-# cat /usr/share/nginx/html/index.html
+cat /usr/share/nginx/html/index.html
 <h1> "Hello World" <h1>
-# exit
+exit
 $ docker exec -ti host2 bash
-# cat /usr/share/nginx/html/index.html
+cat /usr/share/nginx/html/index.html
 <h1> "Hello World" <h1>
-# exit
+exit
 ```
