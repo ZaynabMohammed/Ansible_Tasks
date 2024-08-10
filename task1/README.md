@@ -54,10 +54,10 @@ target2                    : ok=5    changed=3    unreachable=0    failed=0    s
 ```bash
 $ docker exec -ti host1 bash
 cat /usr/share/nginx/html/index.html
-<h1> "Hello World" <h1>
+<h1> "Hello World" </h1>
 exit
 $ docker exec -ti host2 bash
 cat /usr/share/nginx/html/index.html
-<h1> "Hello World" <h1>
+<h1> "Hello World" </h1>
 exit
 ```
