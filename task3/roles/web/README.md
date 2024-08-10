@@ -2,15 +2,15 @@ web
 =========
 Requirements
 ------------
-1. installing a package (get the package name from vars)
-   && (will notify both copying handlers)
-2. Copying a file from controller to hosts using template (get the template name & template message from vars) 
-   && (the actual template file will be stored in ./roles/web/templates)
-   && (will notify the restart handler) 
-3. Copying a list of files from controller to hosts using loop (get the list of file names from vars) 
-   && (the actual files will be stored in ./roles/web/files)
-   && (will also notify the restart handler)
-4. Restart the service of the installed package (will be executed using Handlerschaining)
+1. installing a package (get the package name from vars)    
+   && (will notify both copying handlers)  
+2. Copying a file from controller to hosts using template (get the template name & template message from vars)   
+   && (the actual template file will be stored in ./roles/web/templates)  
+   && (will notify the restart handler)   
+3. Copying a list of files from controller to hosts using loop (get the list of file names from vars)  
+   && (the actual files will be stored in ./roles/web/files)  
+   && (will also notify the restart handler)  
+4. Restart the service of the installed package (will be executed using Handlerschaining)  
 
 Role Tasks
 --------------
@@ -35,14 +35,14 @@ Role Variables
 
 Role Files
 --------------
-- Contain files that will be used by `Copy_files_task_name` handler
-   1. index.html
-   2. hello.txt
+Contain files that will be used by `Copy_files_task_name` handler.
+   - index.html
+   - hello.txt
       
 Role Templates
 --------------
-- Contain `Jinja2` file that will be used by `template_task_name` handler
-----> will generate file with `[host_name, ipaddress]` which will be taken from inventory file and `[msg]` which will be taken from variables.
+- Contain `Jinja2` file that will be used by `template_task_name` handler.  
+--> will generate file with `[host_name, ipaddress]` which will be taken from inventory file and `[msg]` which will be taken from variables.
 ```bash
 hostname, ipaddress, msg
 {% for host in groups['targets_based_on_Docker'] %}
