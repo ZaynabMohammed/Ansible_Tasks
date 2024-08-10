@@ -41,8 +41,8 @@ Contain files that will be used by `Copy_files_task_name` handler.
       
 Role Templates
 --------------
-- Contain `Jinja2` file that will be used by `template_task_name` handler.  
---> will generate file with `[host_name, ipaddress]` which will be taken from inventory file and `[msg]` which will be taken from variables.
+- Contain `Jinja2` file that will be used by `template_task_name` handler that will  
+  Copy `[host_name, ipaddress]` from inventory file and `[msg]` from variables.
 ```bash
 hostname, ipaddress, msg
 {% for host in groups['targets_based_on_Docker'] %}
