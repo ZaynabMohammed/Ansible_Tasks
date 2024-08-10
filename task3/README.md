@@ -50,14 +50,14 @@ target2                    : ok=5    changed=4    unreachable=0    failed=0    s
 - The below check is for host1, and host2 will be the same thing.
 ```bash
 $ docker exec -ti host1 bash
-`:/# cd /root`
-`:~# ls`
+cd /root
+:/root# ls
 hosts_info.txt
-`:~# cat hosts_info.txt`
+:/root# cat hosts_info.txt
 hostname, ipaddress, msg
 target1, 172.17.0.2, Hello_Ansible
 target2, 172.17.0.3, Hello_Ansible
-`:~# cd /usr/share/nginx/html/`
+cd /usr/share/nginx/html/`
 :/usr/share/nginx/html# ls
 hello.txt  index.html
 :/usr/share/nginx/html# cat index.html
