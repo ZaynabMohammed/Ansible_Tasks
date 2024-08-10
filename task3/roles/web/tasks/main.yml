@@ -1,0 +1,8 @@
+- name: Install latest nginx
+  become: true
+  apt:
+    name: nginx
+    state: latest
+  notify: 
+    - "{{ Copy_files_task_name }}"
+    - "{{ template_task_name }}"      

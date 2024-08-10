@@ -1,0 +1,20 @@
+- name: "{{ Copy_files_task_name }}"
+  become: true
+  copy:
+    src: "./roles/web/files/{{item}}"
+    dest: "/usr/share/nginx/html/{{item}}"
+  loop: "{{ list_of_files }}"    
+  notify: restart_Nginx
+ 
+- name: "{{ template_task_name }}"
+  template:
+    src: hosts_info.txt.j2 
+    dest: /root/hosts_info.txt
+  notify: restart_Nginx      
+
+- name: restart_Nginx 
+  become: true 
+  service:
+    name: nginx 
+    state: restarted
+

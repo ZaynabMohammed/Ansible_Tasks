@@ -1,0 +1,4 @@
+hostname, ipaddress, msg
+{% for host in groups['targets_based_on_Docker'] %}
+{{ host }}, {{ hostvars[host]['ansible_host'] }}, {{ msg }}
+{% endfor %}

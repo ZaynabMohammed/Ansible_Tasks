@@ -1,0 +1,9 @@
+# vars file for web
+Copy_files_task_name: "Copy_files"
+template_task_name: "Copy_with_template"  
+
+list_of_files:
+  - index.html
+  - hello.txt
+
+msg: "Hello_Ansible"

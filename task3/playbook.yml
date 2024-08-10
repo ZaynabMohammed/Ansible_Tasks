@@ -1,0 +1,5 @@
+- name: Install nginx
+  hosts: targets_based_on_Docker
+  roles:
+    - web
+
