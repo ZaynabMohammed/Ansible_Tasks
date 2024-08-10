@@ -1,38 +1,51 @@
-Role Name
+web
 =========
-
-A brief description of the role goes here.
-
 Requirements
 ------------
+1. installing a package (get the package name from vars)
+   && (will notify both copying handlers)
+2. Copying a file from controller to hosts using template (get the template name & template message from vars) 
+   && (the actual template file will be stored in ./roles/web/templates)
+   && (will notify the restart handler) 
+3. Copying a list of files from controller to hosts using loop (get the list of file names from vars) 
+   && (the actual files will be stored in ./roles/web/files)
+   && (will also notify the restart handler)
+4. Restart the service of the installed package (will be executed using Handlerschaining)
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Role Tasks
+--------------
+1. `Install latest nginx` task, that will notify two handlers:
+   a. `Copy_files_task_name` handler
+   b. `template_task_name` handler
 
+Role Handlers
+--------------
+1. `Copy_files_task_name` handler, which notified by `Install latest nginx` task
+2. `template_task_name` handler, which notified by `Install latest nginx` task
+3. `restart_Nginx` hadler, which notified by `Copy_files_task_name` && `template_task_name`
+   
 Role Variables
 --------------
+1. Copy_files_task_name
+2. template_task_name
+3. list_of_files:
+  - index.html
+  - hello.txt
+4. msg: "Hello_Ansible" --->template will use this massage
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Role Files
+--------------
+- Contain files that will be used by `Copy_files_task_name` handler
+   1. index.html
+   2. hello.txt
+      
+Role Templates
+--------------
+- Contain `Jinja2` file that will be used by `template_task_name` handler
+----> will generate file with `[host_name, ipaddress]` which will be taken from inventory file and `[msg]` which will be taken from variables.
+```bash
+hostname, ipaddress, msg
+{% for host in groups['targets_based_on_Docker'] %}
+{{ host }}, {{ hostvars[host]['ansible_host'] }}, {{ msg }}
+{% endfor %}
+```
