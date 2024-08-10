@@ -57,7 +57,8 @@ hosts_info.txt
 hostname, ipaddress, msg
 target1, 172.17.0.2, Hello_Ansible
 target2, 172.17.0.3, Hello_Ansible
-cd /usr/share/nginx/html/`
+-------------------------------------
+cd /usr/share/nginx/html/
 :/usr/share/nginx/html# ls
 hello.txt  index.html
 :/usr/share/nginx/html# cat index.html
